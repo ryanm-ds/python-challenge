@@ -1,23 +1,23 @@
 
 # coding: utf-8
 
-# In[17]:
+# In[2]:
 
 import pandas as pd
 import numpy as np
 
 
-# In[2]:
+# In[3]:
 
 df = pd.read_csv('/Users/ryanmichels/Downloads/budget_data.csv')
 
 
-# In[3]:
+# In[4]:
 
 df.head()
 
 
-# In[24]:
+# In[5]:
 
 df.shape
 
@@ -27,12 +27,12 @@ df.shape
 total_number_months = df['Date'].count()
 
 
-# In[35]:
+# In[7]:
 
 net_profit = df['Profit/Losses'].sum()
 
 
-# In[261]:
+# In[8]:
 
 diff =0
 for i in range(len(df['Profit/Losses'])-1):
@@ -40,7 +40,7 @@ for i in range(len(df['Profit/Losses'])-1):
 average_changes = diff/85    
 
 
-# In[262]:
+# In[9]:
 
 a = []
 for i in range(len(df['Profit/Losses'])-1):
@@ -48,12 +48,12 @@ for i in range(len(df['Profit/Losses'])-1):
 max(a),min(a)
 
 
-# In[133]:
+# In[10]:
 
 a
 
 
-# In[256]:
+# In[11]:
 
 def get_greatest_increase(df, answer =0):
     profit_change = df['Profit/Losses'].iloc[1] - df['Profit/Losses'].iloc[0]
@@ -65,17 +65,17 @@ def get_greatest_increase(df, answer =0):
             
 
 
-# In[257]:
+# In[12]:
 
 get_greatest_increase(df)
 
 
-# In[251]:
+# In[13]:
 
 greatest_increase_profits = df['Profit/Losses'].iloc[25] - df['Profit/Losses'].iloc[24]
 
 
-# In[254]:
+# In[14]:
 
 def get_greatest_decrease(df, answer =0):
     loss_change = df['Profit/Losses'].iloc[1] - df['Profit/Losses'].iloc[0]
@@ -86,17 +86,17 @@ def get_greatest_decrease(df, answer =0):
     return answer
 
 
-# In[255]:
+# In[15]:
 
 get_greatest_decrease(df)
 
 
-# In[249]:
+# In[16]:
 
 greatest_decrease_losses = df['Profit/Losses'].iloc[44] - df['Profit/Losses'].iloc[43]
 
 
-# In[260]:
+# In[44]:
 
 print("\tFinancial Analysis\n_____________________________________")
 print("Total Months: \t ", total_number_months)
@@ -104,6 +104,20 @@ print("Total Profits: \t$", net_profit)
 print("Average Change: $", round(average_changes,2))
 print("Greatest Increase in Profits:", df['Date'].iloc[25],  "($"  ,greatest_increase_profits,")")
 print("Greatest Derease in Profits:", df['Date'].iloc[44],  "($"  ,greatest_decrease_losses,")")
+
+
+# In[45]:
+
+file = open("test.txt", "w") 
+file.write("Financial Analysis" + "\n") 
+file.write("_____________________________________\n") 
+file.write("Total Months: {}\n".format(total_number_months)) 
+file.write("Total Profits:  ${}\n".format(net_profit)) 
+file.write("Average Change:  ${}\n".format(round(average_changes,2))) 
+file.write("Greatest Increase in Profits:  {} (${})\n".format(df['Date'].iloc[25],greatest_increase_profits)) 
+file.write("Greatest Decrease in Profits:  {} (${})".format(df['Date'].iloc[44],greatest_decrease_losses)) 
+ 
+file.close() 
 
 
 # In[ ]:
